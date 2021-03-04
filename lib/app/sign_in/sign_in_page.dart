@@ -1,7 +1,10 @@
 import 'package:couter_app/app/common_widget/custom_raised_button.dart';
+import 'package:couter_app/app/sign_in/sign_in_btn.dart';
+import 'package:couter_app/app/sign_in/social_sign_in_btn.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
 
 class SignInPage extends StatelessWidget {
   @override
@@ -31,31 +34,41 @@ class SignInPage extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 8.0),
-          CustomRaisedButton(
-            child: Text(
-              'Sign up with Google',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 15.0,
-              ),
-            ),
-            borderRadius: 4.0,
+          SizedBox(height: 48.0),
+          SocialSignInButton(
+            imgSource: 'images/google-logo.png',
+            text: 'Sign in with Google',
+            color: Colors.white70,
+            textColor: Colors.black87,
             onPressed: _loginWithGoogle,
           ),
           SizedBox(height: 8.0),
-          CustomRaisedButton(
-            child: Text(
-              'Sign in with Facebook',
-              style: TextStyle(
-                color: Colors.black54,
-                fontSize: 15.0,
-              ),
-            ),
-            color: Colors.lightBlue,
-            borderRadius: 4.0,
-            onPressed: _logInWithFacebook,
-          )
+        SocialSignInButton(
+          imgSource: 'images/facebook-logo.png',
+          text: 'Sign in with Facebook',
+          color: Color(0XFF3B5998),
+          textColor: Colors.white70,
+          onPressed: _logInWithFacebook,
+        ),
+          SizedBox(height: 8.0),
+          SignInButton(
+            text: 'Sign in with Email',
+            textColor: Colors.white70,
+            color: Colors.teal,
+            onPressed: _loginWithEmail,
+          ),
+          SizedBox(height: 8.0),
+          Text('or',
+            style: TextStyle(fontSize: 14.0, color: Colors.black54),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 8.0),
+          SignInButton(
+            text: 'Go Anonymous',
+            textColor: Colors.white70,
+            color: Colors.lightGreen,
+            onPressed: _loginAnonymous,
+          ),
         ],
       ),
     );
@@ -68,4 +81,12 @@ _logInWithFacebook() {
 
 _loginWithGoogle() {
   print('login with Google');
+}
+
+_loginWithEmail() {
+  print('log in with Email');
+}
+
+_loginAnonymous() {
+  print('go Anonymous');
 }
