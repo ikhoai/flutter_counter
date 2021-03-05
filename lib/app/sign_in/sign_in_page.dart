@@ -1,6 +1,7 @@
 import 'package:couter_app/app/common_widget/custom_raised_button.dart';
 import 'package:couter_app/app/sign_in/sign_in_btn.dart';
 import 'package:couter_app/app/sign_in/social_sign_in_btn.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -87,6 +88,12 @@ _loginWithEmail() {
   print('log in with Email');
 }
 
-_loginAnonymous() {
+Future<void> _loginAnonymous() async {
   print('go Anonymous');
+  try {
+    final userCredentials = await FirebaseAuth.instance.signInAnonymously();
+    print(userCredentials.user.uid);
+  } catch (e) {
+    print(e.toString());
+  }
 }
