@@ -1,4 +1,5 @@
 import 'package:couter_app/app/common_widget/custom_raised_button.dart';
+import 'package:couter_app/app/services/auth.dart';
 import 'package:couter_app/app/sign_in/sign_in_btn.dart';
 import 'package:couter_app/app/sign_in/social_sign_in_btn.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +9,20 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 class SignInPage extends StatelessWidget {
+  const SignInPage({Key key, @required this.auth, @required this.onSignIn}) : super(key: key);
+  final void Function(User) onSignIn;
+  final AuthBase auth;
+
+  Future<void> _loginAnonymous() async {
+    try {
+      final user = await auth.signInAnonymously();
+      onSignIn(user);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,12 +103,8 @@ _loginWithEmail() {
   print('log in with Email');
 }
 
-Future<void> _loginAnonymous() async {
-  print('go Anonymous');
-  try {
-    final userCredentials = await FirebaseAuth.instance.signInAnonymously();
-    print(userCredentials.user.uid);
-  } catch (e) {
-    print(e.toString());
-  }
-}
+
+
+
+
+
